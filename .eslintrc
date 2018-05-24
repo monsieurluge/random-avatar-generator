@@ -1,0 +1,29 @@
+{
+    "env": {
+        "browser": 1,
+        "es6": 1
+    },
+    "globals": {},
+    "rules": {
+        "brace-style": [ "warn", "1tbs" ],
+        "curly": [ "warn", "all" ],
+        "default-case": "warn",
+        "eqeqeq": "error",
+        "eol-last": "warn",
+        "no-alert": "warn",
+        "no-console": "error",
+        "no-eval": "error",
+        "no-nested-ternary": "warn",
+        "no-var": 1,
+        "no-return-assign": [ "error", "always" ],
+        "no-unreachable": "error",
+        "no-unused-vars": "error",
+        "padded-blocks": [ "error", "never" ],
+        "quotes": [ "warn", "single", "avoid-escape" ],
+        "space-before-blocks": [ "error", "always" ],
+        "space-before-function-paren": [ "error", "never" ],
+        "space-infix-ops": [ "error", { "int32Hint": true } ],
+        "vars-on-top": "warn",
+    },
+    "plugins": []
+}
