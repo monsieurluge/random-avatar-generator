@@ -1,0 +1,21 @@
+{
+  "name": "random-avatar-generator",
+  "version": "0.1.0",
+  "description": "A minimal random avatar generator, using Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/monsieurluge/random-avatar-generator",
+  "keywords": [
+    "Electron",
+    "random",
+    "avatar",
+    "generator"
+  ],
+  "author": "monsieurluge",
+  "license": "The Unlicense",
+  "devDependencies": {
+    "electron": "^2.0.0"
+  }
+}
