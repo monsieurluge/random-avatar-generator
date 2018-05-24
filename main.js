@@ -9,6 +9,8 @@ const BrowserWindow = electron.BrowserWindow // module to create native browser 
 //   closed automatically when the JavaScript object is garbage collected
 let mainWindow
 
+// ------------------------------------------------------------ GLOBAL FUNCTIONS
+
 const createWindow = () => {
     mainWindow = new BrowserWindow({ width: 500, height: 500, resizable: false })
 
@@ -25,7 +27,7 @@ const createWindow = () => {
     // mainWindow.webContents.openDevTools()
 }
 
-// ---------------------------------------------------------------------- EVENTS
+// ------------------------------------------------------------------ APP EVENTS
 
 app.on('ready', createWindow)
 
