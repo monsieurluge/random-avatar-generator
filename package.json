@@ -14,9 +14,9 @@
     "generator"
   ],
   "author": "monsieurluge",
-  "license": "The Unlicense",
+  "license": "Unlicense",
   "devDependencies": {
-    "electron": "^2.0.0",
+    "electron": ">=2.0.8",
     "eslint": "^4.19.1"
   }
 }
