@@ -1,48 +1,56 @@
-const electron = require('electron')
+const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
 
-const app = electron.app // module to control application life
-const BrowserWindow = electron.BrowserWindow // module to create native browser window
+// --------------------------------------------------------------------- GLOBALS
 
-// keep a global reference of the window object, if you don't, the window will be
-//   closed automatically when the JavaScript object is garbage collected
-let mainWindow
+app.devmode = function() {
+    app.win.setSize(1000, 500)
 
-// ------------------------------------------------------------ GLOBAL FUNCTIONS
+    app.win.webContents.openDevTools()
+}
 
-const createWindow = () => {
-    mainWindow = new BrowserWindow({ width: 500, height: 500, resizable: false })
+// -------------------------------------------------------------------- ON READY
 
-    mainWindow.loadURL(url.format({
+app.on('ready', () => {
+    app.win = new BrowserWindow({
+        width: 500,
+        height: 500,
+        minWidth: 500,
+        minHeight: 500,
+        resizable: true,
+        frame: false,
+        backgroundColor: '#212121',
+        webPreferences: { zoomFactor: 1.0 },
+    })
+
+    app.win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
         slashes: true
     }))
 
-    mainWindow.on('closed', () => {
-        mainWindow = null
+    // app.devmode()
+
+    app.win.on('closed', () => {
+        win = null
+
+        app.quit()
     })
 
-    // mainWindow.webContents.openDevTools()
-}
+    app.on('activate', () => {
+        if (app.win === null) {
+            // on OS X it's common to re-create a window in the app when the
+            //   dock icon is clicked and there are no other windows open
+            createWindow()
+        }
+    })
 
-// ------------------------------------------------------------------ APP EVENTS
-
-app.on('ready', createWindow)
-
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        // on OS X it is common for applications and their menu bar
-        //   to stay active until the user quits explicitly with Cmd + Q
-        app.quit()
-    }
-})
-
-app.on('activate', () => {
-    if (mainWindow === null) {
-        // on OS X it's common to re-create a window in the app when the
-        //   dock icon is clicked and there are no other windows open
-        createWindow()
-    }
+    app.on('window-all-closed', () => {
+        if (process.platform !== 'darwin') {
+            // on OS X it is common for applications and their menu bar
+            //   to stay active until the user quits explicitly with Cmd + Q
+            app.quit()
+        }
+    })
 })
