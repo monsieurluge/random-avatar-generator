@@ -25,12 +25,12 @@ app.on('ready', () => {
     })
 
     app.win.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
+        pathname: path.join(__dirname, '/sources/index.html'),
         protocol: 'file:',
         slashes: true
     }))
 
-    // app.devmode()
+    app.devmode()
 
     app.win.on('closed', () => {
         win = null

@@ -11,8 +11,14 @@
             <canvas id="canvas" width="420px" height="420px"></canvas>
         </div>
 
+        <script type="text/javascript" src="generator.js">
+
+        </script>
+
         <script>
-            require('./renderer.js')
+            generator = new Generator()
+
+            generator.install(document.getElementById('avatar'))
         </script>
     </body>
 </html>
