@@ -8,17 +8,22 @@
 
     <body style="-webkit-app-region: drag">
         <div id="avatar">
-            <canvas id="canvas" width="420px" height="420px"></canvas>
+            <canvas id="grid" width="420px" height="420px"></canvas>
         </div>
 
-        <script type="text/javascript" src="generator.js">
-
-        </script>
+        <script src="drawings.js"></script>
+        <script src="generator.js"></script>
+        <script src="grid.js"></script>
 
         <script>
+            const theme = {
+                grid: { background: '#FF0050', grid: '#900050' }
+            }
+
             generator = new Generator()
 
-            generator.install(document.getElementById('avatar'))
+            generator.install({ grid: 'grid', theme })
+            generator.start()
         </script>
     </body>
 </html>
