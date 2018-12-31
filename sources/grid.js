@@ -8,9 +8,9 @@ function Grid({ canvas, size, theme }) {
     this.width   = canvas.width
 }
 
-Grid.prototype.draw = function() {
+Grid.prototype.show = function() {
     this.clear()
-    this.drawGrid()
+    this.drawSpots()
 }
 
 Grid.prototype.clear = function() {
@@ -21,20 +21,15 @@ Grid.prototype.clear = function() {
     })
 }
 
-Grid.prototype.drawGrid = function() {
-    for (let i = 1; i < this.size; i++) {
-        const current = i * (this.width / this.size)
+Grid.prototype.drawSpots = function() {
+    for (let j = 1; j < this.size; j++) {
+        for (let i = 1; i < this.size; i++) {
+            const position = {
+                x: i * (this.width / this.size),
+                y: j * (this.height / this.size)
+            }
 
-        drawLine(this.context)({
-            start: { x: current, y: 0 },
-            end: { x: current, y: this.height },
-            color: this.theme.grid
-        })
-
-        drawLine(this.context)({
-            start: { x: 0, y: current },
-            end: { x: this.width, y: current },
-            color: this.theme.grid
-        })
+            drawSpot(this.context)({ position, color: this.theme.grid })
+        }
     }
 }

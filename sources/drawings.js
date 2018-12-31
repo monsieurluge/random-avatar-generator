@@ -12,3 +12,10 @@ const drawLine = context => ({ start, end, color }) => {
     context.lineTo(end.x, end.y)
     context.stroke()
 }
+
+const drawSpot = context => ({ position, color }) => {
+    context.fillStyle = color
+    context.beginPath()
+    context.arc(position.x, position.y, 2, 0, 2 * Math.PI)
+    context.fill()
+}

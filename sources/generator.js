@@ -15,5 +15,5 @@ Generator.prototype.install = function({ grid, theme }) {
 }
 
 Generator.prototype.start = function() {
-    this.grid.draw()
+    this.grid.show()
 }
