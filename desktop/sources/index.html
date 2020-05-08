@@ -1,29 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
         <title>Random Avatar Generator</title>
-        <link rel="stylesheet" href="styles.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="links/reset.css" />
+        <link rel="stylesheet" type="text/css" href="links/main.css" />
     </head>
 
-    <body style="-webkit-app-region: drag">
-        <div id="avatar">
-            <canvas id="grid" width="420px" height="420px"></canvas>
-        </div>
-
-        <script src="scripts/drawings.js"></script>
-        <script src="scripts/generator.js"></script>
-        <script src="scripts/grid.js"></script>
-
-        <script>
-            const theme = {
-                grid: { background: '#3e3a37', grid: '#d0a770' }
-            }
-
-            generator = new Generator()
-
-            generator.install({ grid: 'grid', theme })
-            generator.start()
-        </script>
+    <body style="-webkit-app-region:drag">
     </body>
 </html>
