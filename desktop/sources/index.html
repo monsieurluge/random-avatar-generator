@@ -6,8 +6,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="links/reset.css" />
         <link rel="stylesheet" type="text/css" href="links/main.css" />
+        <script src="scripts/client.js"></script>
+        <script src="scripts/renderer.js"></script>
     </head>
 
     <body style="-webkit-app-region:drag">
+        <script>
+            'use strict'
+            const client = new Client()
+            client.install(document.body)
+            window.addEventListener('load', () => client.start)
+        </script>
     </body>
 </html>

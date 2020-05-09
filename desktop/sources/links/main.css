@@ -7,7 +7,15 @@ body {
   overflow: hidden;
   transition: background-color 500ms;
   -webkit-app-region: drag;
-  padding: 30px;
   width: calc(100vw - 60px);
   height: calc(100vh - 60px);
+}
+
+#avatar {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
 }
