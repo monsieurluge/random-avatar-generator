@@ -7,8 +7,8 @@ body {
   overflow: hidden;
   transition: background-color 500ms;
   -webkit-app-region: drag;
-  width: calc(100vw - 60px);
-  height: calc(100vh - 60px);
+  width: calc(100vw);
+  height: calc(100vh);
 }
 
 #avatar {
