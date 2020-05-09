@@ -5,8 +5,6 @@ const url = require('url')
 // --------------------------------------------------------------------- GLOBALS
 
 app.devmode = function() {
-  app.win.setSize(1000, 460)
-
   app.win.webContents.openDevTools()
 }
 
