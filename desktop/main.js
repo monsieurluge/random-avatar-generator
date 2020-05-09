@@ -18,7 +18,7 @@ app.on('ready', () => {
     height: 460,
     minWidth: 460,
     minHeight: 460,
-    resizable: true,
+    resizable: false,
     frame: false,
     backgroundColor: '#212121',
     skipTaskbar: process.platform === 'darwin',
