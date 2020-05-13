@@ -1,5 +1,7 @@
 'use strict'
 
-const randomRgbColor = randomValue(256)
+const cssRgbColor = color => `rgb(${color.red}, ${color.green}, ${color.blue})`
 
-const randomColor = () => ({ red: randomRgbColor(), green: randomRgbColor(), blue: randomRgbColor() })
+const randomRgbValue = randomValue(256)
+
+const randomRgbColor = () => ({ red: randomRgbValue(), green: randomRgbValue(), blue: randomRgbValue() })
