@@ -14,13 +14,18 @@ function Renderer(client) {
     const size = Math.min(target.height, target.width)
     const cssSize = `${size}px`
 
-    this.canvas.height = cssSize
-    this.canvas.width = cssSize
+    this.canvas.height = size
+    this.canvas.width = size
     this.canvas.style.height = cssSize
     this.canvas.style.width = cssSize
   }
 
   this.start = function() {
     this.resize()
+  }
+
+  this.update = function() {
+    this.resize()
+    client.avatar.draw(this.context)
   }
 }

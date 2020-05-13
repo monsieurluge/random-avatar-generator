@@ -4,6 +4,7 @@ function Client() {
   const padding = { height: 60, width: 60 }
 
   this.install = function(host) {
+    this.avatar = new Avatar()
     this.renderer = new Renderer(this)
 
     this.renderer.install(host)
@@ -18,5 +19,6 @@ function Client() {
 
   this.start = function() {
     this.renderer.start()
+    this.renderer.update()
   }
 }
