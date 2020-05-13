@@ -5,8 +5,10 @@ function Avatar() {
 
   this.baseColor = randomRgbColor()
   this.grain = 5
+  this.seed = Date.now()
 
   this.draw = function(context) {
+    const blockout = seededRandom(this.seed)
     const height = context.canvas.height
     const width = context.canvas.width
     const size = Math.min(height, width)
@@ -22,7 +24,7 @@ function Avatar() {
     let currentColor = this.baseColor
 
     for (let step = 0; step < steps; step++) {
-      if (blockout()) {
+      if (blockout() < 0.4) {
         continue
       }
       this.drawMirroredCells({
