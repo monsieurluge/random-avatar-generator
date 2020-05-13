@@ -11,13 +11,11 @@ function Renderer(client) {
 
   this.resize = function() {
     const target = client.paddedSize()
-    const size = Math.min(target.height, target.width)
-    const cssSize = `${size}px`
-
-    this.canvas.height = size
-    this.canvas.width = size
-    this.canvas.style.height = cssSize
-    this.canvas.style.width = cssSize
+    const cssSize = size => `${size}px`
+    this.canvas.height = target.height
+    this.canvas.width = target.width
+    this.canvas.style.height = cssSize(target.height)
+    this.canvas.style.width = cssSize(target.width)
   }
 
   this.start = function() {
