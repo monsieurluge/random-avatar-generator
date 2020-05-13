@@ -27,6 +27,7 @@ function Avatar() {
       }
       this.drawMirroredCells({
         context,
+        padding,
         color: currentColor,
         x: step % widthSteps,
         y: Math.floor(step / widthSteps),
@@ -37,13 +38,13 @@ function Avatar() {
     }
   }
 
-  this.drawCell = function({ context, color, x, y, cellSize }) {
+  this.drawCell = function({ context, padding, color, x, y, cellSize }) {
     context.fillStyle = cssRgbColor(color)
-    context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
+    context.fillRect(x * cellSize + padding.left, y * cellSize + padding.top, cellSize, cellSize)
   }
 
-  this.drawMirroredCells = function ({ context, color, x, y, cellSize, size }) {
-    this.drawCell({ context, color, x, y, cellSize })
-    this.drawCell({ context, color, x: this.grain - x - 1, y, cellSize })
+  this.drawMirroredCells = function ({ context, padding, color, x, y, cellSize, size }) {
+    this.drawCell({ context, padding, color, x, y, cellSize })
+    this.drawCell({ context, padding, color, x: this.grain - x - 1, y, cellSize })
   }
 }

@@ -7,7 +7,13 @@ function Client() {
     this.avatar = new Avatar()
     this.renderer = new Renderer(this)
 
+    window.addEventListener('resize', () => { this.onResize() }, false)
+
     this.renderer.install(host)
+  }
+
+  this.onResize = function() {
+    this.renderer.update()
   }
 
   this.paddedSize = function() {

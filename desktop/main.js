@@ -14,9 +14,9 @@ app.on('ready', () => {
   app.win = new BrowserWindow({
     width: 460,
     height: 460,
-    minWidth: 460,
-    minHeight: 460,
-    resizable: false,
+    minWidth: 380,
+    minHeight: 380,
+    resizable: true,
     frame: false,
     backgroundColor: '#212121',
     skipTaskbar: process.platform === 'darwin',
