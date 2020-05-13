@@ -13,9 +13,7 @@ body {
 
 #avatar {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 60px;
+  left: 60px;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
 }

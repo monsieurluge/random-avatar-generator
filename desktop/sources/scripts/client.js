@@ -1,7 +1,7 @@
 'use strict'
 
 function Client() {
-  const padding = { height: 60, width: 60 }
+  const padding = { height: 120, width: 120 }
 
   this.install = function(host) {
     this.avatar = new Avatar()
