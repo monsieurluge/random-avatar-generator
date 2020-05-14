@@ -12,11 +12,9 @@ app.devmode = function() {
 
 app.on('ready', () => {
   app.win = new BrowserWindow({
-    width: 460,
-    height: 460,
-    minWidth: 380,
-    minHeight: 380,
-    resizable: true,
+    width: 400,
+    height: 400,
+    resizable: false,
     frame: false,
     backgroundColor: '#212121',
     skipTaskbar: process.platform === 'darwin',

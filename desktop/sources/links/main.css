@@ -1,14 +1,13 @@
 /* --------------------------------------------------------------------- CORE */
 
 body {
-  margin: 10px;
   font-family: 'input_mono_regular';
   -webkit-user-select: none;
   overflow: hidden;
   transition: background-color 500ms;
   -webkit-app-region: drag;
-  width: calc(100vw - 20px);
-  height: calc(100vh - 20px);
+  width: calc(100vw);
+  height: calc(100vh);
 }
 
 #avatar {
