@@ -1,23 +1,17 @@
 'use strict'
 
-function Avatar() {
+function Avatar({ seed = Date.now() } = {}) {
   this.baseColor = randomRgbColor()
   this.grain = 5
-  this.seed = Date.now()
 
-  this.draw = function(context) {
-    const blockout = seededRandom(this.seed)
-    const height = context.canvas.height
-    const width = context.canvas.width
-    const size = Math.min(height, width)
+  this.draw = function() {
+    const blockout = seededRandom(seed)
+    const size = 280
     const widthSteps = Math.ceil(this.grain / 2)
     const cellSize = size / this.grain
     const steps = this.grain * widthSteps
-    const padding = (height > width)
-      ? { top: (height - width) / 2, left: 0 }
-      : { top: 0, left: (width - height) / 2 }
 
-    context.clearRect(0, 0, width, height)
+    this.context.clearRect(0, 0, 280, 280)
 
     let currentColor = this.baseColor
 
@@ -26,25 +20,35 @@ function Avatar() {
         continue
       }
       this.drawMirroredCells({
-        context,
-        padding,
         color: currentColor,
         x: step % widthSteps,
         y: Math.floor(step / widthSteps),
-        cellSize,
-        size
+        cellSize
       })
       currentColor = nextRgbColor(currentColor)
     }
   }
 
-  this.drawCell = function({ context, padding, color, x, y, cellSize }) {
-    context.fillStyle = cssRgbColor(color)
-    context.fillRect(x * cellSize + padding.left, y * cellSize + padding.top, cellSize, cellSize)
+  this.drawCell = function({ color, x, y, cellSize }) {
+    this.context.fillStyle = cssRgbColor(color)
+    this.context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
   }
 
-  this.drawMirroredCells = function ({ context, padding, color, x, y, cellSize, size }) {
-    this.drawCell({ context, padding, color, x, y, cellSize })
-    this.drawCell({ context, padding, color, x: this.grain - x - 1, y, cellSize })
+  this.drawMirroredCells = function ({ color, x, y, cellSize }) {
+    this.drawCell({ color, x, y, cellSize })
+    this.drawCell({ color, x: this.grain - x - 1, y, cellSize })
+  }
+
+  this.install = function(host) {
+    this.canvas = document.createElement('canvas')
+    this.canvas.id = 'avatar'
+    this.context = this.canvas.getContext('2d')
+
+    this.canvas.height = 280
+    this.canvas.width = 280
+    this.canvas.style.height = '280px'
+    this.canvas.style.width = '280px'
+
+    host.appendChild(this.canvas)
   }
 }

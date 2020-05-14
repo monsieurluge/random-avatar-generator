@@ -4,16 +4,9 @@ function Client() {
   const padding = { height: 120, width: 120 }
 
   this.install = function(host) {
-    this.avatar = new Avatar()
-    this.renderer = new Renderer(this)
+    this.avatar = new Avatar({ seed: 666})
 
-    window.addEventListener('resize', () => { this.onResize() }, false)
-
-    this.renderer.install(host)
-  }
-
-  this.onResize = function() {
-    this.renderer.update()
+    this.avatar.install(host)
   }
 
   this.paddedSize = function() {
@@ -24,7 +17,6 @@ function Client() {
   }
 
   this.start = function() {
-    this.renderer.start()
-    this.renderer.update()
+    this.avatar.draw()
   }
 }
