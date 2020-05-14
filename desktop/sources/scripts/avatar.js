@@ -1,8 +1,6 @@
 'use strict'
 
 function Avatar() {
-  const blockout = () => Math.random() < 0.4
-
   this.baseColor = randomRgbColor()
   this.grain = 5
   this.seed = Date.now()
