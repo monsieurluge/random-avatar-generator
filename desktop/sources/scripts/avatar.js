@@ -1,12 +1,16 @@
 'use strict'
 
 function Avatar({ seed = Date.now() } = {}) {
+  const random = seededRandom(seed)
+  const blockout = () => random() < 0.4
   const size = 280
-  this.baseColor = randomRgbColor()
-  this.grain = 5
+
+  const drawCell = function({ context, color, x, y, cellSize }) {
+    context.fillStyle = cssRgbColor(color)
+    context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
+  }
 
   this.draw = function() {
-    const blockout = seededRandom(seed)
     const widthSteps = Math.ceil(this.grain / 2)
     const cellSize = size / this.grain
     const steps = this.grain * widthSteps
@@ -16,12 +20,20 @@ function Avatar({ seed = Date.now() } = {}) {
     let currentColor = this.baseColor
 
     for (let step = 0; step < steps; step++) {
-      if (blockout() < 0.4) {
+      if (blockout()) {
         continue
       }
-      this.drawMirroredCells({
+      drawCell({
+        context: this.context,
         color: currentColor,
         x: step % widthSteps,
+        y: Math.floor(step / widthSteps),
+        cellSize
+      })
+      drawCell({
+        context: this.context,
+        color: currentColor,
+        x: this.grain - step % widthSteps - 1,
         y: Math.floor(step / widthSteps),
         cellSize
       })
@@ -29,17 +41,10 @@ function Avatar({ seed = Date.now() } = {}) {
     }
   }
 
-  this.drawCell = function({ color, x, y, cellSize }) {
-    this.context.fillStyle = cssRgbColor(color)
-    this.context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
-  }
-
-  this.drawMirroredCells = function ({ color, x, y, cellSize }) {
-    this.drawCell({ color, x, y, cellSize })
-    this.drawCell({ color, x: this.grain - x - 1, y, cellSize })
-  }
-
   this.install = function(host) {
+    this.baseColor = randomRgbColor()
+    this.grain = 5
+
     this.canvas = document.createElement('canvas')
     this.canvas.id = 'avatar'
     this.context = this.canvas.getContext('2d')
