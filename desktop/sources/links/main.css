@@ -16,3 +16,45 @@ body {
   left: 60px;
   overflow: hidden;
 }
+
+#tools-bar {
+  -webkit-app-region: no-drag;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  height: 40px;
+  right: 0;
+}
+
+#tools-bar .tools {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  transition: top 300ms;
+}
+
+#tools-bar:hover .tools {
+  top: 0;
+}
+
+#tools-bar svg.icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+#tools-bar svg.icon path {
+  fill: none;
+  stroke: #707070;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 12px;
+  transition: stroke 300ms;
+}
+
+#tools-bar svg.icon:hover path {
+  stroke: #e4e4e4;
+}
