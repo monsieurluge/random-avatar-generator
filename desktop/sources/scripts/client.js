@@ -2,11 +2,17 @@
 
 function Client() {
   this.install = function(host) {
-    this.avatar = new Avatar()
+    this.tools = []
+
+    this.avatar = new Avatar({ listener: this })
     this.interface = new Interface()
 
     this.avatar.install(host)
     this.interface.install(host)
+  }
+
+  this.register = function({ name, callback }) {
+    this.tools.push({ name, callback })
   }
 
   this.start = function() {
@@ -15,7 +21,8 @@ function Client() {
   }
 
   this.toolRequested = function(name) {
-    // todo
-    console.log('tool requested:', name)
+    this.tools
+      .filter(tool => tool.name === name)
+      .map(tool => tool.callback())
   }
 }

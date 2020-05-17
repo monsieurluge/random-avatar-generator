@@ -1,6 +1,6 @@
 'use strict'
 
-function Avatar({ seed = Date.now() } = {}) {
+function Avatar({ listener, seed = Date.now() } = {}) {
   const random = seededRandom(seed)
   const blockout = () => random() < 0.4
   const size = 280
@@ -41,6 +41,14 @@ function Avatar({ seed = Date.now() } = {}) {
     }
   }
 
+  this.changeGrain = function(scope) {
+    scope.grain += 1
+    if (scope.grain > 7) {
+      scope.grain = 3
+    }
+    scope.draw()
+  }
+
   this.install = function(host) {
     this.baseColor = randomRgbColor()
     this.grain = 5
@@ -55,5 +63,7 @@ function Avatar({ seed = Date.now() } = {}) {
     this.canvas.style.width = `${size}px`
 
     host.appendChild(this.canvas)
+
+    listener.register({ name: 'grain', callback: () => this.changeGrain(this) })
   }
 }
