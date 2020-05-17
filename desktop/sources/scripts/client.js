@@ -13,4 +13,9 @@ function Client() {
     this.avatar.draw()
     this.interface.start()
   }
+
+  this.toolRequested = function(name) {
+    // todo
+    console.log('tool requested:', name)
+  }
 }

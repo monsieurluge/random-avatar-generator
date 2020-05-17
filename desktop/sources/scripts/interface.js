@@ -17,14 +17,16 @@ function Interface() {
 
     tools.forEach(tool => {
       htmlContent += `
-      <svg title="${name}" viewbox="0 0 300 300" class="icon">
+      <svg
+        title="${name}"
+        viewbox="0 0 300 300"
+        class="icon"
+        onmouseup="client.toolRequested('${tool.name}')">
         <path class="icon_path" d="${tool.icon}"/>
       </svg>`
     })
 
     htmlContent += '</div>'
-
-    console.log(htmlContent)
 
     this.tools.innerHTML = htmlContent
   }
