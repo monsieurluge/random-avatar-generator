@@ -10,7 +10,7 @@ function Avatar({ listener, seed = Date.now() } = {}) {
 
   this.draw = function() {
     const random = seededRandom(seed + this.seedOffset)
-    const blockout = () => random() < 0.4
+    const localBlockout = blockout(random)
     const widthSteps = Math.ceil(this.grain / 2)
     const cellSize = size / this.grain
     const steps = this.grain * widthSteps
@@ -20,7 +20,7 @@ function Avatar({ listener, seed = Date.now() } = {}) {
     let currentColor = this.baseColor
 
     for (let step = 0; step < steps; step++) {
-      if (blockout()) {
+      if (localBlockout()) {
         continue
       }
       drawCell({

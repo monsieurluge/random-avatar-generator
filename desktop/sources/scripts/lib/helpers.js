@@ -1,5 +1,7 @@
 'use strict'
 
+const blockout = randomizer => () => randomizer() < 0.4
+
 const randomValue = max => () => Math.floor(Math.random() * max)
 
 const seededRandom = function(seed) {
