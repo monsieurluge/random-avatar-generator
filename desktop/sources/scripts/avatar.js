@@ -1,8 +1,6 @@
 'use strict'
 
-function Avatar({ listener, seed = Date.now() } = {}) {
-  const size = 280
-
+function Avatar({ listener, seed = Date.now(), size = 280 } = {}) {
   const drawCell = function({ context, color, x, y, cellSize }) {
     context.fillStyle = cssRgbColor(color)
     context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
