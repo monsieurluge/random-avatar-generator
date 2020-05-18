@@ -9,7 +9,7 @@ function Avatar({ listener, seed = Date.now() } = {}) {
   }
 
   this.draw = function() {
-    const random = seededRandom(seed)
+    const random = seededRandom(seed + this.seedOffset)
     const blockout = () => random() < 0.4
     const widthSteps = Math.ceil(this.grain / 2)
     const cellSize = size / this.grain
@@ -52,6 +52,7 @@ function Avatar({ listener, seed = Date.now() } = {}) {
   this.install = function(host) {
     this.baseColor = randomRgbColor()
     this.grain = 5
+    this.seedOffset = 0
 
     this.canvas = document.createElement('canvas')
     this.canvas.id = 'avatar'
@@ -65,5 +66,11 @@ function Avatar({ listener, seed = Date.now() } = {}) {
     host.appendChild(this.canvas)
 
     listener.register({ name: 'grain', callback: () => this.changeGrain(this) })
+    listener.register({ name: 'next', callback: () => this.next(this) })
+  }
+
+  this.next = function (scope) {
+    scope.seedOffset += 1
+    scope.draw()
   }
 }
