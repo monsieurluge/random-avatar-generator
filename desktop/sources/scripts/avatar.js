@@ -1,8 +1,6 @@
 'use strict'
 
 function Avatar({ listener, seed = Date.now() } = {}) {
-  const random = seededRandom(seed)
-  const blockout = () => random() < 0.4
   const size = 280
 
   const drawCell = function({ context, color, x, y, cellSize }) {
@@ -11,6 +9,8 @@ function Avatar({ listener, seed = Date.now() } = {}) {
   }
 
   this.draw = function() {
+    const random = seededRandom(seed)
+    const blockout = () => random() < 0.4
     const widthSteps = Math.ceil(this.grain / 2)
     const cellSize = size / this.grain
     const steps = this.grain * widthSteps
