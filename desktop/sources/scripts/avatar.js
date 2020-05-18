@@ -10,14 +10,15 @@ function Avatar({ listener, seed = Date.now() } = {}) {
 
   this.draw = function() {
     const random = seededRandom(seed + this.seedOffset)
+    const randomColor = randomRgbColor(random)
     const localBlockout = blockout(random)
     const widthSteps = Math.ceil(this.grain / 2)
     const cellSize = size / this.grain
     const steps = this.grain * widthSteps
 
-    this.context.clearRect(0, 0, size, size)
+    let currentColor = randomColor()
 
-    let currentColor = this.baseColor
+    this.context.clearRect(0, 0, size, size)
 
     for (let step = 0; step < steps; step++) {
       if (localBlockout()) {
@@ -50,7 +51,6 @@ function Avatar({ listener, seed = Date.now() } = {}) {
   }
 
   this.install = function(host) {
-    this.baseColor = randomRgbColor()
     this.grain = 5
     this.seedOffset = 0
 

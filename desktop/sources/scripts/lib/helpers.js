@@ -2,7 +2,7 @@
 
 const blockout = randomizer => () => randomizer() < 0.4
 
-const randomValue = max => () => Math.floor(Math.random() * max)
+const randomValue = randomizer => max => () => Math.floor(randomizer() * max)
 
 const seededRandom = function(seed) {
   let mask = 0xffffffff
