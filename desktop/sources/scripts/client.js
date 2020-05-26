@@ -4,7 +4,8 @@ function Client() {
   this.install = function(host) {
     this.tools = []
 
-    this.avatar = new Avatar({ listener: this })
+    this.avatarCanvas = createCanvas({ id: 'avatar', dimensions: { height: 280, width: 280 }, host })
+    this.avatar = Avatar({ context: this.avatarCanvas.context, listener: this, grain: 5, seed: 42, size: 280 })
     this.interface = new Interface()
 
     this.avatar.install(host)
@@ -16,7 +17,7 @@ function Client() {
   }
 
   this.start = function() {
-    this.avatar.draw()
+    this.avatar.draw(this.avatarCanvas)
     this.interface.start()
   }
 
