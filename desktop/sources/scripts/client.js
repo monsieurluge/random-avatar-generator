@@ -1,29 +1,34 @@
 'use strict'
 
 function Client() {
-  this.install = function(host) {
-    this.tools = []
+  let tools = []
+  let avatar = undefined
+  let avatarCanvas = undefined
+  let gui = undefined
 
-    this.avatarCanvas = createCanvas({ id: 'avatar', dimensions: { height: 280, width: 280 }, host })
-    this.avatar = Avatar({ context: this.avatarCanvas.context, listener: this, grain: 5, seed: 42, size: 280 })
-    this.interface = new Interface()
+  function install(host) {
+    avatarCanvas = createCanvas({ id: 'avatar', dimensions: { height: 280, width: 280 }, host })
+    avatar = Avatar({ context: avatarCanvas.context, listener: this, grain: 5, seed: 42, size: 280 })
+    gui = new Interface()
 
-    this.avatar.install(host)
-    this.interface.install(host)
+    avatar.install(host)
+    gui.install(host)
   }
 
-  this.register = function({ name, callback }) {
-    this.tools.push({ name, callback })
+  function register({ name, callback }) {
+    tools.push({ name, callback })
   }
 
-  this.start = function() {
-    this.avatar.draw(this.avatarCanvas)
-    this.interface.start()
+  function start() {
+    avatar.draw(avatarCanvas)
+    gui.start()
   }
 
-  this.toolRequested = function(name) {
-    this.tools
+  function toolRequested(name) {
+    tools
       .filter(tool => tool.name === name)
       .map(tool => tool.callback())
   }
+
+  return Object.freeze({ install, register, start, toolRequested })
 }
