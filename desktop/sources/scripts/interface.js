@@ -1,14 +1,16 @@
 'use strict'
 
 function Interface() {
-  this.install = function (host) {
-    this.tools = document.createElement('div')
-    this.tools.id = 'tools-bar'
+  let toolsBar = undefined
 
-    host.appendChild(this.tools)
+  function install(host) {
+    toolsBar = document.createElement('div')
+    toolsBar.id = 'tools-bar'
+
+    host.appendChild(toolsBar)
   }
 
-  this.start = function () {
+  function start() {
     const tools = [
       { name: 'next', icon: 'M80 80 L220 150 L80 220 V80' },
       { name: 'grain', icon: 'M60 120 H240 M60 180 H240 M120 60 V240 M180 60 V240' },
@@ -29,6 +31,8 @@ function Interface() {
 
     htmlContent += '</div>'
 
-    this.tools.innerHTML = htmlContent
+    toolsBar.innerHTML = htmlContent
   }
+
+  return Object.freeze({ install, start })
 }

@@ -9,7 +9,7 @@ function Client() {
   function install(host) {
     avatarCanvas = createCanvas({ id: 'avatar', dimensions: { height: 280, width: 280 }, host })
     avatar = Avatar({ context: avatarCanvas.context, listener: this, grain: 5, seed: 42, size: 280 })
-    gui = new Interface()
+    gui = Interface()
 
     avatar.install(host)
     gui.install(host)
