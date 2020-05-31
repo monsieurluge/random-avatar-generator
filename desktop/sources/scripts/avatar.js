@@ -50,8 +50,8 @@ function Avatar({ context, grain = 5, listener, seed = Date.now(), size } = {}) 
   }
 
   function install(host) {
-    listener.register({ name: 'grain', callback: () => changeGrain() })
-    listener.register({ name: 'next', callback: () => next() })
+    listener.register({ name: 'grain', callback: changeGrain })
+    listener.register({ name: 'next', callback: next })
   }
 
   function next() {
