@@ -20,7 +20,7 @@ function Client() {
   }
 
   function start() {
-    avatar.draw(avatarCanvas)
+    avatar.start()
     gui.start()
   }
 

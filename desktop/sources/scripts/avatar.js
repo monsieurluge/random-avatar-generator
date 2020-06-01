@@ -3,42 +3,45 @@
 function Avatar({ context, grain = 5, listener, seed = Date.now(), size } = {}) {
   let grainOffset = 0
   let seedOffset = 0
+  let cells = []
 
-  const drawCell = function({ color, x, y, cellSize }) {
+  const drawCell = cellSize => ({ color, x, y }) => {
     context.fillStyle = cssRgbColor(color)
     context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
   }
 
-  function draw() {
+  const generateCells = function() {
     const random = seededRandom(seed + seedOffset)
     const randomColor = randomRgbColor(random)
     const localBlockout = blockout(random)
     const widthSteps = Math.ceil((grain + grainOffset) / 2)
-    const cellSize = size / (grain + grainOffset)
     const steps = (grain + grainOffset) * widthSteps
 
     let currentColor = randomColor()
 
-    context.clearRect(0, 0, size, size)
+    cells = []
 
     for (let step = 0; step < steps; step++) {
       if (localBlockout()) {
         continue
       }
-      drawCell({
+      cells.push({
         color: currentColor,
         x: step % widthSteps,
-        y: Math.floor(step / widthSteps),
-        cellSize
+        y: Math.floor(step / widthSteps)
       })
-      drawCell({
+      cells.push({
         color: currentColor,
         x: (grain + grainOffset) - step % widthSteps - 1,
-        y: Math.floor(step / widthSteps),
-        cellSize
+        y: Math.floor(step / widthSteps)
       })
       currentColor = nextRgbColor(currentColor)
     }
+  }
+
+  function draw() {
+    context.clearRect(0, 0, size, size)
+    cells.map(drawCell(size / (grain + grainOffset)))
   }
 
   function changeGrain() {
@@ -46,6 +49,7 @@ function Avatar({ context, grain = 5, listener, seed = Date.now(), size } = {}) 
     if (grainOffset > 2) {
       grainOffset = -2
     }
+    generateCells()
     draw()
   }
 
@@ -56,11 +60,18 @@ function Avatar({ context, grain = 5, listener, seed = Date.now(), size } = {}) 
 
   function next() {
     seedOffset += 1
+    generateCells()
+    draw()
+  }
+
+  function start() {
+    generateCells()
     draw()
   }
 
   return Object.freeze({
     draw,
-    install
+    install,
+    start
   })
 }
