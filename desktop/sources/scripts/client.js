@@ -1,7 +1,6 @@
 'use strict'
 
 function Client({ host, dispatcher }) {
-  let tools = []
   let avatar = undefined
   let avatarCanvas = undefined
   let gui = undefined
