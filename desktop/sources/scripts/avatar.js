@@ -44,6 +44,10 @@ function Avatar({ context, grain = 5, listener, seed = Date.now(), size } = {}) 
     cells.map(drawCell(size / (grain + grainOffset)))
   }
 
+  /**
+   * [changeGrain description]
+   * @return {[type]} [description]
+   */
   function changeGrain() {
     grainOffset += 1
     if (grainOffset > 2) {
@@ -55,13 +59,6 @@ function Avatar({ context, grain = 5, listener, seed = Date.now(), size } = {}) 
 
   function install(host) {
     listener.register({ name: 'grain', callback: changeGrain })
-    listener.register({ name: 'next', callback: next })
-  }
-
-  function next() {
-    seedOffset += 1
-    generateCells()
-    draw()
   }
 
   function start() {

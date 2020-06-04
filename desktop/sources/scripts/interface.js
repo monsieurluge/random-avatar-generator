@@ -24,7 +24,7 @@ function Interface() {
         title="${name}"
         viewbox="0 0 300 300"
         class="icon"
-        onmouseup="client.toolRequested('${tool.name}')">
+        onmouseup="dispatcher.emit('${tool.name}')">
         <path class="icon_path" d="${tool.icon}"/>
       </svg>`
     })

@@ -1,22 +1,26 @@
 'use strict'
 
-function Client() {
+function Client({ host, dispatcher }) {
   let tools = []
   let avatar = undefined
   let avatarCanvas = undefined
   let gui = undefined
 
-  function install(host) {
+  function install() {
     avatarCanvas = createCanvas({ id: 'avatar', dimensions: { height: 280, width: 280 }, host })
-    avatar = Avatar({ context: avatarCanvas.context, listener: this, grain: 5, seed: 42, size: 280 })
+    avatar = Avatar({ context: avatarCanvas.context, listener: dispatcher, grain: 5, seed: 42, size: 280 })
     gui = Interface()
+
+    dispatcher.register({ name: 'next', callback: nextAvatar })
 
     avatar.install(host)
     gui.install(host)
   }
 
-  function register({ name, callback }) {
-    tools.push({ name, callback })
+  function nextAvatar() {
+    avatar = Avatar({ context: avatarCanvas.context, listener: dispatcher, grain: 5, seed: Date.now(), size: 280 })
+    avatar.install(host)
+    avatar.start()
   }
 
   function start() {
@@ -24,11 +28,5 @@ function Client() {
     gui.start()
   }
 
-  function toolRequested(name) {
-    tools
-      .filter(tool => tool.name === name)
-      .map(tool => tool.callback())
-  }
-
-  return Object.freeze({ install, register, start, toolRequested })
+  return Object.freeze({ install, start })
 }
