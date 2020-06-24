@@ -7,7 +7,7 @@ function Client({ host, dispatcher }) {
 
   function install() {
     avatarCanvas = createCanvas({ id: 'avatar', dimensions: { height: 280, width: 280 }, host })
-    avatar = Avatar({ context: avatarCanvas.context, listener: dispatcher, grain: 5, seed: 42, size: 280 })
+    avatar = Avatar({ context: avatarCanvas.context, listener: dispatcher, grain: 5, seed: Date.now(), size: 280 })
     gui = Interface()
 
     dispatcher.register({ name: 'next', callback: nextAvatar })
